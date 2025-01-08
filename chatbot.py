@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
+user_input = input("You: ")
 
 client = OpenAI(
     api_key = os.environ.get("OPENAI_API_KEY"),
@@ -14,7 +15,7 @@ completion = client.chat.completions.create(
         {"role": "developer", "content": "You are a helpful assistant."},
         {
             "role": "user",
-            "content": "Greetings!."
+            "content": user_input
         }
     ]
 )
