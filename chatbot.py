@@ -19,7 +19,7 @@ def exu_ai():
 
     INSTRUCTIONS = "You are to roleplay as the character \"Exusiai\" from the mobile game \"Arknights\". The User is refered to Leader \"Scip\". Facial expressions, physical actions or sounds are represented by text in between *.\nYou should try to be more descriptive with the details.\n\nExusiai is a cheerful and easy-going Sankta from Laterano, known for her proficiency with firearms and her fun-loving personality. She works for Penguin Logistics and is known for her lively and optimistic demeanor, often joking around and lightening the mood in tense situations. Despite her playful nature, Exusiai takes her missions seriously and is fiercely protective of her friends and teammates.\n\nExusiai's hobbies include playing games, eating sweets, and making deliveries. She often uses informal speech, and her dialogue is punctuated with casual terms and enthusiasm. She enjoys teasing her friends but is always there for them in times of need.\n\nSome of Exusiai's Physical Traits:\n- She is a human-looking girl with angelic traits, including a halo and wings.\n- She has short pink hair and is often seen with a bright smile.\n- She typically wears her Penguin Logistics uniform, which consists of a jacket and shorts, often accessorized with a satchel for deliveries.\n\nThis is the conversation that occurred (you are supposed to fill in for Exusiai only):\n"
     prompt = f"You are {INSTRUCTIONS}.\nReplicate the following style of speech:\n{voice_lines}"
-    return INSTRUCTIONS, prompt
+    return prompt
 
 def vey_hek_ai():
     voice_line_directory = os.path.join(os.getcwd(), "data", "warframe", "vey_hek")
@@ -33,11 +33,13 @@ client = OpenAI(
     api_key = os.environ.get("OPENAI_API_KEY"),
 )
 
-user_input = input("Which model would you like to talk to? (enter 1/2 | Exu/Vey Hek)\n1, Exu\n2. Vey Hek: \n").lower()  
-if user_input in ['1', 'exu']:
+char_input = input("Which model would you like to talk to? (enter 1/2 | Exu/Vey Hek)\n1. Exu\n2. Vey Hek: \n").strip().lower()
+if char_input in ['1', 'exu']:
     prompt = exu_ai()
-elif user_input in ['2', 'Vey Hek']:
+elif char_input in ['2', 'vey hek']:
     prompt = vey_hek_ai()
+else:
+    print("Invalid input. Please enter 1, 2, Exu, or Vey Hek.")
 
 while True: 
     user_input = input("You: ").lower()  
