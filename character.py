@@ -1,9 +1,15 @@
 import os
-from dotenv import load_dotenv
-from openai import OpenAI
 
+def character_section():
+    char_input = input("Which model would you like to talk to? (enter 1/2 | Exu/Vey Hek)\n1. Exu\n2. Vey Hek: \n").strip().lower()
+    if char_input in ['1', 'exu']:
+        prompt = exu_ai()
+    elif char_input in ['2', 'vey hek']:
+        prompt = vey_hek_ai()
+    else:
+        print("Invalid input. Please enter 1, 2, Exu, or Vey Hek.")
+    return prompt
 
-load_dotenv()
 
 def load_voice_lines(directory):
     voice_lines = []  # list for vocie lines
@@ -29,30 +35,3 @@ def vey_hek_ai():
     prompt = f"You are {INSTRUCTIONS}.\nReplicate the following style of speech from the given list:\n{voice_lines}"
     return prompt
 
-client = OpenAI(
-    api_key = os.environ.get("OPENAI_API_KEY"),
-)
-
-char_input = input("Which model would you like to talk to? (enter 1/2 | Exu/Vey Hek)\n1. Exu\n2. Vey Hek: \n").strip().lower()
-if char_input in ['1', 'exu']:
-    prompt = exu_ai()
-elif char_input in ['2', 'vey hek']:
-    prompt = vey_hek_ai()
-else:
-    print("Invalid input. Please enter 1, 2, Exu, or Vey Hek.")
-
-while True: 
-    user_input = input("You: ").lower()  
-    if user_input in ['exit', 'bye', 'end']:
-        print("System: Exiting...")
-        break 
-    # Generate the response from the OpenAI model
-    completion = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "developer", "content": prompt},
-            {"role": "user", "content": user_input}
-        ]
-    )
-    print(completion.choices[0].message.content)
-    print()
