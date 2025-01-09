@@ -1,4 +1,3 @@
-import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from character import *
@@ -20,7 +19,7 @@ while True:
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "developer", "content": prompt},
+            {"role": "system", "content": prompt},
             {"role": "user", "content": user_input}
         ]
     )
