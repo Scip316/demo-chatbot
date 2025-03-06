@@ -1,13 +1,16 @@
 import os
 
 def character_section():
-    char_input = input("Which model would you like to talk to? (enter 1/2 | Exu/Vey Hek)\n1. Exu\n2. Vey Hek: \n").strip().lower()
+    char_input = input("Which model would you like to talk to? (enter 1-3)\n1. Exu\n2. Vey Hek: \n3. toto\n").strip().lower()
     if char_input in ['1', 'exu']:
         prompt = character_prompt("arknight", "exusiai")
 
     elif char_input in ['2', 'vey hek']:
         prompt = character_prompt("warframe", "vey_hek")
-        
+
+    elif char_input in ['3', 'toto']:
+        prompt = character_prompt("toto", "toto")
+
     else:
         print("Invalid input. Please enter 1, 2, Exu, or Vey Hek.")
     return prompt
