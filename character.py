@@ -21,9 +21,12 @@ def load_text_file(file_path):
 
 
 def character_prompt(game, character):
+    # get file dir
     character_file = os.path.join(os.getcwd(), "data", game, character, "character.txt")
     voice_file = os.path.join(os.getcwd(), "data", game, character, "voice.txt")
     instructions_file = os.path.join(os.getcwd(), "data", game, character, "instructions.txt")
+
+    # retrieve the text
     character_text = load_text_file(character_file)
     voice_lines = load_text_file(voice_file)
     instructions_text = load_text_file(instructions_file)
